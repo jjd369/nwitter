@@ -1,5 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithPopup,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -13,3 +21,24 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const authService = getAuth(app);
+
+export const callOnSubmit = async (newAccount, email, password) => {
+  const data = newAccount
+    ? await createUserWithEmailAndPassword(authService, email, password)
+    : await signInWithEmailAndPassword(authService, email, password);
+  return data;
+};
+
+export const onAuthState = (cb) => {
+  onAuthStateChanged(authService, (user) => cb(user));
+};
+
+export const callSignInWithPopup = async (name) => {
+  const provider =
+    name === "google" ? new GoogleAuthProvider() : new GithubAuthProvider();
+
+  const result = await signInWithPopup(authService, provider);
+  console.log(result);
+
+  return result;
+};
