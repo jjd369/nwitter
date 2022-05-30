@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { callOnSubmit, callSignInWithPopup } from "fbConfig";
+import { callOnSubmit, callSignInWithPopup } from "fb/fbAuth";
 
 const Auth = () => {
   // useStates
