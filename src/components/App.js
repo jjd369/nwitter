@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from "react";
 import AppRouter from "components/Router";
-import { authService, onAuthState } from "fb/fbAuth";
+import { onAuthStateChangedLisenter, authService } from "fb/fbAuth";
 
 function App() {
   const [init, setInit] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+  const [userObj, setUserObj] = useState(null);
+
   useEffect(() => {
-    onAuthState((user) => {
-      !user ? setIsLoggedIn(false) : setIsLoggedIn(true);
-      console.log(init);
+    onAuthStateChangedLisenter((user) => {
+      setUserObj(user);
       setInit(true);
     });
   }, []);
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({ ...user });
+  };
   return (
     <>
-      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initiallizing..."}
-      <footer>&copy; Nwitter {new Date().getFullYear()}</footer>
+      {init ? (
+        <AppRouter
+          isLoggedIn={!!userObj}
+          userObj={userObj}
+          refreshUser={refreshUser}
+        />
+      ) : (
+        "Initiallizing..."
+      )}
     </>
   );
 }
