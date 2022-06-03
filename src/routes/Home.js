@@ -13,7 +13,6 @@ const Home = ({ userObj }) => {
   useEffect(() => {
     getNeets();
     unsub((nweets) => {
-      console.log(nweets);
       setNweets(nweets);
     });
   }, []);
