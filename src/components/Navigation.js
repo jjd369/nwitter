@@ -8,7 +8,6 @@ const Nagivation = ({ userObj }) => (
   <nav>
     <ul style={{ display: "flex", justifyContent: "center", marginTop: 50 }}>
       <li>
-        <Link to="/">Home</Link>
         <Link to="/" style={{ marginRight: 10 }}>
           <FontAwesomeIcon icon={faTwitter} color={"#04AAFF"} size="2x" />
         </Link>
@@ -25,7 +24,7 @@ const Nagivation = ({ userObj }) => (
           }}
         >
           <FontAwesomeIcon icon={faUser} color={"#04AAFF"} size="2x" />
-          <span style={{ marginTop: 10 }}>
+          <span style={{ marginTop: "10px" }}>
             {userObj.displayName
               ? `${userObj.displayName}의 Profile`
               : "Profile"}

@@ -18,10 +18,5 @@ export const onUplodAttachment = async (userObj, url) => {
 };
 export const onDeleteAttachement = async (url) => {
   const desertRef = ref(storage, url);
-  const res = await deleteObject(desertRef);
-  console.log("------------------------------------");
-  console.log(res);
-  console.log("------------------------------------");
+  await deleteObject(desertRef);
 };
-// spaceRef now points to "images/space.jpg"
-// imagesRef still points to "images"

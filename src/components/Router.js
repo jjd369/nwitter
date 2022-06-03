@@ -4,6 +4,7 @@ import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
 import Nagivation from "components/Navigation";
+import Layout from "routes/Layout";
 
 const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
   return (
@@ -11,7 +12,9 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
       {isLoggedIn && <Nagivation userObj={userObj} />}
       <Routes>
         {isLoggedIn ? (
-          <div
+          <Route
+            element={<Layout />}
+            path="/"
             style={{
               maxWidth: 890,
               width: "100%",
@@ -21,12 +24,12 @@ const AppRouter = ({ isLoggedIn, userObj, refreshUser }) => {
               justifyContent: "center",
             }}
           >
-            <Route path="/*" element={<Home userObj={userObj} />} />
+            <Route path="/" element={<Home userObj={userObj} />} />
             <Route
               path="/profile"
               element={<Profile userObj={userObj} refreshUser={refreshUser} />}
             />
-          </div>
+          </Route>
         ) : (
           <Route path="/*" element={<Auth />} />
         )}

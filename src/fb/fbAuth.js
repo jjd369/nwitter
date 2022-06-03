@@ -28,14 +28,10 @@ export const onSignInWithPopup = async (name) => {
     name === "google" ? new GoogleAuthProvider() : new GithubAuthProvider();
 
   const result = await signInWithPopup(authService, provider);
-  console.log(result);
 
   return result;
 };
 
 export const onUpdateProfile = async (displayName, photoURL) => {
-  console.log("------------------------------------");
-  console.log("glasofk");
-  console.log("------------------------------------");
   await updateProfile(authService.currentUser, { displayName, photoURL });
 };
